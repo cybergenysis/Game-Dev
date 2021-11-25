@@ -1,0 +1,32 @@
+using UnityEngine;
+
+public class PlayerAttack : MonoBehaviour
+{
+    [SerializeField] private float attackCooldown;
+    private Animator anim;
+    private PlayerMovement playerMovement;
+    private float cooldownTImer = Mathf.Infinity;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+        playerMovement = GetComponent<PlayerMovement>();
+    }
+
+
+
+    private void  Update()
+    {
+        if (Input.GetMouseButton(0) && cooldownTImer > attackCooldown &&  playerMovement.canAttack()
+            Attack();
+
+        cooldownTImer += Time.deltaTime;
+    }
+
+    private void Attack()
+    {
+        anim.SetTrigger("attack");
+        cooldownTImer = 0; 
+    }
+
+}
